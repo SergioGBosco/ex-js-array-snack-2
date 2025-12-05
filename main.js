@@ -115,13 +115,29 @@ const books = [
 // Calcola la somma delle età (agesSum) usando reduce.
 // Stampa in console l’età media degli autori dei libri.
 
-const ages = books.map(b => b.author.age);
-console.log(ages)
+// const ages = books.map(b => b.author.age);
+// console.log(ages)
 
-const agesSum = ages.reduce((acc, eta) => {
-  return acc + eta;
-}, 0);
-console.log(agesSum)
+// const agesSum = ages.reduce((acc, eta) => {
+//   return acc + eta;
+// }, 0);
+// console.log(agesSum)
 
-const etàMediaAutori = agesSum / ages.length;
-console.log(etàMediaAutori)
+// const etàMediaAutori = agesSum / ages.length;
+// console.log(etàMediaAutori)
+
+//SNACK 5
+
+// Usando la l'API http://localhost:3333/books/{id} usa la combinazione di .map() e Promise.all(), per creare una funzione (getBooks) che a partire da un array di id (ids), ritorna una promise che risolve un array di libri (books).
+// Testala con l’array [2, 13, 7, 21, 19] .
+
+async function getBooks(arrayNumeri) {
+
+  const booksPromise = arrayNumeri.map(id => fetch(`http://localhost:3333/books/${id}`).then(resp => resp.json()));
+
+
+  const booksAll = await Promise.all(booksPromise);
+  console.log(booksAll);
+}
+
+getBooks([2, 13, 7, 21, 19]);
